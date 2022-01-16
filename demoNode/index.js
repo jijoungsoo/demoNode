@@ -20,6 +20,8 @@ app.use(bodyParser.urlencoded({extended:  true}))
 //applicaiton/json 을 가져올수있음
 app.use(bodyParser.json())
 
+//쿠키파서를 사용하려면 이렇게 해줘야한다.
+app.use(cookieParser())
 
 
 mongoose.connect(config.mongoURI,{
@@ -131,4 +133,16 @@ app.get('/api/users/auth',auth,(req,res)=>{
             image: req.user.image
         })
 
+})
+
+app.get('/api/users/logout',auth,(req,res)=>{
+    console.log(req.user._id);
+    console.log("logout");
+    User.findOneAndUpdate({_id:req.user._id},{
+        token:""
+    },(err,user)=>{
+        if(err) return res.json({success:false,err});
+
+        return res.status(200).send({success:true})
+    })
 })

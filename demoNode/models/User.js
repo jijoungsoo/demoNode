@@ -79,7 +79,7 @@ userSchema.methods.comparePassword =  function(plainPassword, cb  /*콜백 */){
 userSchema.methods.generateToken= function(cb){
     //jsonwebtoken을 이용해서 token을 생성하기
     var user = this;
-    var token = jwt.sign(user._id.toHexString(),'scretToken')  /*2번째 인자는 아무거나 넣어주면 된다. */
+    var token = jwt.sign(user._id.toHexString(),'secretToken')  /*2번째 인자는 아무거나 넣어주면 된다. */
     /** 
      * user._id
      * 일때 문제발생
