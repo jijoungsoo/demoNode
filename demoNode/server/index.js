@@ -146,3 +146,9 @@ app.get('/api/users/logout',auth,(req,res)=>{
         return res.status(200).send({success:true})
     })
 })
+
+app.get('/api/hello',(req,res)=>{
+
+
+    res.send("안녕하세요~");
+})

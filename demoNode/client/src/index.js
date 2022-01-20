@@ -4,10 +4,27 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import {Provider} from 'react-redux'
+import 'antd/dist/antd.min.css'; // or 'antd/dist/antd.less'
+
+import {applyMiddleware,createStore} from 'redux';
+import promiseMiddleware from 'redux-promise';
+import ReduxThunk from 'redux-thunk'
+import Reducer from './_reducers';   //자동으로 ./_reducers/index.js 로 가준다 
+
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware,ReduxThunk)(createStore);
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <Provider
+    store={createStoreWithMiddleware(Reducer,    
+        window.__REDUX_DEVTOOLS_EXTENSION__ && 
+        window.__REDUX_DEVTOOLS_EXTENSION__() 
+    )
+
+}>
+        <App></App>
+    </Provider>
+  ,
   document.getElementById('root')
 );
 
