@@ -5,10 +5,8 @@ import {useDispatch} from 'react-redux'
 import {loginUser} from '../../../_actions/user_action'
 import { useNavigate } from "react-router-dom";
 
-function LoaginPage(props) {
+function LoaginPage() {
     const dispatch = useDispatch();
-
-
     const navigate = useNavigate();
 
     //props,state
@@ -38,8 +36,6 @@ function LoaginPage(props) {
 
         dispatch(loginUser(body))
         .then(response=>{
-            console.log('cccccccc')
-            console.log(response.payload.loginSuccess)
             if(response.payload.loginSuccess){
                 ///props.history.push('/') v5일때 
 
@@ -48,13 +44,6 @@ function LoaginPage(props) {
                 alert('Error')
             }
         })
-
-        /* 1안 ---- 우리는 reduxer를 사용할꺼니까 방법이 달라진다.
-        Axios.post('/api/users/login',body,onSubmitHandler)
-        .then(response=>{
-
-        })
-        */
     }
 
 

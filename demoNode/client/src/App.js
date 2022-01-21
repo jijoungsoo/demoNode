@@ -2,55 +2,33 @@ import './App.css';
 import React from "react";
 import {
   BrowserRouter as Router,
-  withRouter,
   Routes,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 import LandingPage from './components/views/LandingPage/LandingPage'
 import LoginPage from './components/views/LoginPage/LoginPage'
 import RegisterPage from './components/views/RegisterPage/RegisterPage'
 
+import Auth from './hoc/auth'
+
 function App() {
+
+    const NewLandingPage = Auth(LandingPage,null);
+    const NewLoginPage = Auth(LoginPage,false);
+    const NewRegisterPage = Auth(RegisterPage,false);
+
   return (
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login"  element={<LoginPage />} />
-          <Route path="/register"  element={<RegisterPage />} />
+          <Route path="/" element={<NewLandingPage />} />
+          <Route path="/login"  element={<NewLoginPage />} />
+          <Route path="/register"  element={<NewRegisterPage />} />
         </Routes>
       </div>
     </Router>
   );
 }
-
-// You can think of these components as "pages"
-// in your app.
-
-function Home() {
-    return (
-      <div>
-        <h2>Home 안녕하세요</h2>
-      </div>
-    );
-  }
-  
-  function About() {
-    return (
-      <div>
-        <h2>About</h2>
-      </div>
-    );
-  }
-  
-  function Dashboard() {
-    return (
-      <div>
-        <h2>Dashboard</h2>
-      </div>
-    );
-  }
 
 export default App;
